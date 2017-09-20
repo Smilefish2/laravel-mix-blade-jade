@@ -38,8 +38,15 @@ class MixJadeTask extends Task {
      *
      */
     compile() {
+        try {
 
-        this.templates.forEach((template, index) => this.compileTemplate(template, index));
+            this.templates.forEach((template, index) => this.compileTemplate(template, index));
+
+            this.onSuccess();
+
+        } catch (e) {
+            this.onFail(e.name + ': ' + e.message);
+        }
 
         return this;
     }
@@ -65,10 +72,8 @@ class MixJadeTask extends Task {
 
             fs.writeFileSync(output.path(), html);
 
-            this.onSuccess();
-
         } catch (e) {
-            this.onFail(e.name + ': ' + e.message);
+            throw e;
         }
     }
 
@@ -92,7 +97,7 @@ class MixJadeTask extends Task {
             notifier.notify({
                 title: 'Laravel Mix',
                 message: 'Jade Compilation Successful',
-                contentImage: 'node_modules/laravel-mix-blade-jade/src/logo.png'
+                contentImage: Mix.paths.root('node_modules/laravel-mix-blade-jade/src/logo.png')
             });
         }
     }
@@ -114,7 +119,7 @@ class MixJadeTask extends Task {
                 title: 'Laravel Mix',
                 subtitle: 'Jade Compilation Failed',
                 message: output,
-                contentImage: 'node_modules/laravel-mix-blade-jade/src/logo.png'
+                contentImage: Mix.paths.root('node_modules/laravel-mix-blade-jade/src/logo.png')
             });
         }
     }
