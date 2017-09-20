@@ -97,7 +97,7 @@ class MixJadeTask extends Task {
             notifier.notify({
                 title: 'Laravel Mix',
                 message: 'Jade Compilation Successful',
-                contentImage: Mix.paths.root('node_modules/laravel-mix-blade-jade/src/logo.png')
+                icon: Mix.paths.root('node_modules/laravel-mix-blade-jade/src/logo.png')
             });
         }
     }
@@ -119,7 +119,7 @@ class MixJadeTask extends Task {
                 title: 'Laravel Mix',
                 subtitle: 'Jade Compilation Failed',
                 message: output,
-                contentImage: Mix.paths.root('node_modules/laravel-mix-blade-jade/src/logo.png')
+                icon: Mix.paths.root('node_modules/laravel-mix-blade-jade/src/logo.png')
             });
         }
     }
